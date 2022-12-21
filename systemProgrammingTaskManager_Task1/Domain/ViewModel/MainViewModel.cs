@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using systemProgrammingTaskManager_Task1.Domain.RelayCommands;
 
 namespace systemProgrammingTaskManager_Task1.Domain.ViewModel
 {
@@ -21,8 +22,24 @@ namespace systemProgrammingTaskManager_Task1.Domain.ViewModel
             set { allprocess = value;OnPropertyChanged(); }
         }
 
+
+        private Process currentProcess;
+
+        public Process CurrentProcess
+        {
+            get { return currentProcess; }
+            set { currentProcess = value; }
+        }
+
+        public RelayCommand ChangeCurrentProcess { get; set; }
+
         public MainViewModel()
         {
+            ChangeCurrentProcess = new RelayCommand(o =>
+            {
+
+            });
+
             AllProcess = Process.GetProcesses();
             Process process= new Process();
 

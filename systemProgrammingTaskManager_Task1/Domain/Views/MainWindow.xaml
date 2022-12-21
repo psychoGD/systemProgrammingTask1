@@ -10,11 +10,11 @@
     <Grid>
         <ListView ItemsSource="{Binding AllProcess}"
                       SelectedItem="{Binding Customer}"
-                      Background="White"  >
+                      Background="White">
             
             <i:Interaction.Triggers>
-                <i:EventTrigger EventName="MouseDoubleClick">
-                    <i:InvokeCommandAction Command="{Binding CommandToBindTo}" />
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding ChangeCurrentProcess}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <ListView.View>

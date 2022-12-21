@@ -66,6 +66,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Domain\RelayCommands\RelayCommand.cs" />
     <Compile Include="Domain\ViewModel\BaseViewModel.cs" />
     <Compile Include="Domain\ViewModel\MainViewModel.cs" />
     <Compile Include="Domain\Views\MainWindow.xaml.cs">
