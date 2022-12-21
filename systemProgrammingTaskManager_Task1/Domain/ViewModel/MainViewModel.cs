@@ -31,15 +31,9 @@ namespace systemProgrammingTaskManager_Task1.Domain.ViewModel
             set { currentProcess = value; }
         }
 
-        public RelayCommand ChangeCurrentProcess { get; set; }
-
         public MainViewModel()
         {
-            ChangeCurrentProcess = new RelayCommand(o =>
-            {
-
-            });
-
+            
             AllProcess = Process.GetProcesses();
             Process process= new Process();
 
