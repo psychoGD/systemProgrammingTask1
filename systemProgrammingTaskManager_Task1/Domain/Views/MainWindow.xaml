@@ -7,56 +7,73 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="MyButton">
+            <Setter Property="Background" Value="#FED600"></Setter>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="BorderBrush" Value="White"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="Margin" Value="0,10,0,0"></Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
-        <StackPanel Orientation="Vertical">
-            
-            <StackPanel Height="390" >
-                <ListView ItemsSource="{Binding AllProcess}"
-                      SelectedItem="{Binding CurrentProcess}"
-                      Background="White">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Name" Width="120" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Padding="5,0" Text="{Binding ProcessName}" ></TextBlock>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+            <ColumnDefinition ></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel  Grid.Column="0" Orientation="Horizontal">
+            <ListView Name="MyListView" ItemsSource="{Binding AllProcess}"
+                      SelectedItem="{Binding CurrentProcess,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                      
+                      Background="White"
+                          ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" Width="120" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Padding="5,0" Text="{Binding ProcessName}" ></TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                            <GridViewColumn Header="Id" Width="120" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Padding="5,0" Text="{Binding Id}" ></TextBlock>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="Id" Width="120" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Padding="5,0" Text="{Binding Id}" ></TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                            <GridViewColumn Header="Handle Count" Width="120" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Padding="5,0" Text="{Binding HandleCount}" ></TextBlock>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                        <GridViewColumn Header="Handle Count" Width="120" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Padding="5,0" Text="{Binding HandleCount}" ></TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                            <GridViewColumn Header="Thread Count" Width="120" >
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Padding="5,0" Text="{Binding Threads.Count}" ></TextBlock>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </StackPanel>
-            <StackPanel Height="50" Orientation="Horizontal">
-                <TextBox Width="200"></TextBox>
-                <Button Content="Add Process"></Button>
-            </StackPanel>
+                        <GridViewColumn Header="Thread Count" Width="120" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Padding="5,0" Text="{Binding Threads.Count}" ></TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </StackPanel>
-        
-        
+        <StackPanel Grid.Column="1"  Orientation="Vertical">
+            <TextBox Text="{Binding Word,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="16" ></TextBox>
+            <Button Content="Add Process" Style="{StaticResource MyButton}" Command="{Binding AddProcess}"></Button>
+            <Button Content="Find Process" Style="{StaticResource MyButton}" Command="{Binding FindProcess}"></Button>
+            <Button Content="End Process" Style="{StaticResource MyButton}"
+                    Command="{Binding EndProcess}"></Button>
+            
+            
+        </StackPanel>
+
+
     </Grid>
 </Window>

@@ -24,7 +24,7 @@ namespace systemProgrammingTaskManager_Task1
         public MainWindow()
         {
             InitializeComponent();
-            var vm = new MainViewModel();
+            var vm = new MainViewModel(MyListView);
             this.DataContext = vm;
         }
     }
