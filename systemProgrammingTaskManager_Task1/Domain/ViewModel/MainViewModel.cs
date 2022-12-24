@@ -22,6 +22,13 @@ namespace systemProgrammingTaskManager_Task1.Domain.ViewModel
             get { return word; }
             set { word = value;OnPropertyChanged(); }
         }
+        private int index;
+
+        public int Index
+        {
+            get { return index; }
+            set { index = value;OnPropertyChanged(); }
+        }
 
 
         private List<Process> allprocess;
@@ -41,12 +48,15 @@ namespace systemProgrammingTaskManager_Task1.Domain.ViewModel
             set { currentProcess = value;OnPropertyChanged(); }
         }
 
+       
+        
+
         public RelayCommand AddProcess { get; set; }
         public RelayCommand EndProcess { get; set; }
         public RelayCommand FindProcess { get; set; }
         public MainViewModel(ListView listView)
         {
-
+            ListView = listView;
             AllProcess = Process.GetProcesses().ToList();
             Process process = new Process();
 
@@ -72,18 +82,23 @@ namespace systemProgrammingTaskManager_Task1.Domain.ViewModel
                 {
                     MessageBox.Show(process1.Id.ToString());
                     CurrentProcess = process1;
+                    ListView.ScrollIntoView(process1);
                 }
                 else
                 {
                     MessageBox.Show("This Process Isnt Exist");
                 }
             });
-            ListView = listView;
         }
 
         private void OnTimerEvent(object sender, EventArgs e)
         {
+            int index2 = Index;
+
+
             AllProcess= Process.GetProcesses().ToList();
+            
+            Index= index2;
         }
 
         

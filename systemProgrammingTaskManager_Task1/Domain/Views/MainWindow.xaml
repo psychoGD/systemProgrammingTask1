@@ -23,6 +23,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel  Grid.Column="0" Orientation="Horizontal">
             <ListView Name="MyListView" ItemsSource="{Binding AllProcess}"
+                      SelectedIndex="{Binding Index,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding CurrentProcess,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                       
                       Background="White"
