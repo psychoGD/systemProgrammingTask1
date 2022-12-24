@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -48,26 +49,37 @@ namespace systemProgrammingTaskManager_Task1.Domain.ViewModel
             set { currentProcess = value;OnPropertyChanged(); }
         }
 
-       
-        
+        private ObservableCollection<string> blackList;
+
+        public ObservableCollection<string> BlackList
+        {
+            get { return blackList; }
+            set { blackList = value;OnPropertyChanged(); }
+        }
+
+
 
         public RelayCommand AddProcess { get; set; }
         public RelayCommand EndProcess { get; set; }
         public RelayCommand FindProcess { get; set; }
+        public RelayCommand AddToBlacklist { get; set; }
         public MainViewModel(ListView listView)
         {
             ListView = listView;
             AllProcess = Process.GetProcesses().ToList();
             Process process = new Process();
+            BlackList = new ObservableCollection<string>();
+
 
             DispatcherTimer dispatcherTimer = new DispatcherTimer(); ;
             dispatcherTimer.Tick += OnTimerEvent;
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 4);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 1);
             dispatcherTimer.Start();
 
 
             AddProcess = new RelayCommand(o =>
             {
+
                 Process.Start(Word);
                 Word = string.Empty;
             });
@@ -89,16 +101,23 @@ namespace systemProgrammingTaskManager_Task1.Domain.ViewModel
                     MessageBox.Show("This Process Isnt Exist");
                 }
             });
-        }
+            AddToBlacklist = new RelayCommand(o =>
+            {
+                BlackList.Add(Word);
+                Word= string.Empty;
+            });
 
+        }
+        public int IndexCopy { get; set; }
         private void OnTimerEvent(object sender, EventArgs e)
         {
-            int index2 = Index;
-
+            IndexCopy = Index;
 
             AllProcess= Process.GetProcesses().ToList();
-            
-            Index= index2;
+            var any = AllProcess.Where(b => BlackList.Any(a => a == b.ProcessName)).ToList();
+            any.ForEach(p => p.Kill());
+
+            Index = IndexCopy;
         }
 
         

@@ -71,8 +71,9 @@
             <Button Content="Find Process" Style="{StaticResource MyButton}" Command="{Binding FindProcess}"></Button>
             <Button Content="End Process" Style="{StaticResource MyButton}"
                     Command="{Binding EndProcess}"></Button>
-            
-            
+            <Button Content="Add Process To BlackList" Style="{StaticResource MyButton}"
+                    Command="{Binding AddToBlacklist}"></Button>
+            <ListBox ItemsSource="{Binding BlackList}"></ListBox>
         </StackPanel>
 
 
